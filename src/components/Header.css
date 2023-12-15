@@ -1,0 +1,25 @@
+.todo-img {
+  width: 100%;
+  position: relative;
+}
+
+.image-text {
+  position: absolute;
+  top: 42%;
+  left: 77%;
+  text-align: right;
+}
+
+.time-display {
+  color: #fff;
+  font-family: "Russo One", sans-serif;
+  font-size: 48px;
+  font-weight: 400;
+}
+
+.date {
+  color: #fff;
+  font-family: "Russo One", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+}

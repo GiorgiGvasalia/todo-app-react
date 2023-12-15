@@ -1,0 +1,27 @@
+.input {
+  background-color: #fff;
+}
+
+.note-input {
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    background: #ebeff2;
+    padding: 0.8rem 1rem;
+    max-width: 400px;
+    width: 100%;
+    color: #888;
+    font-size: 16px;
+    font-weight: 400;
+    padding-left: 10%;
+  }
+  
+  .add-note-icon {
+    width: 17%;
+  }
+  
+  .done-icon {
+    position: absolute;
+    transform: translate(23%, 4%);
+  }
+  

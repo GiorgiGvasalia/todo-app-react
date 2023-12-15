@@ -1,0 +1,23 @@
+
+.application {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100vh;
+  border-radius: 10px;
+}
+
+.todo-container {
+  background-color: #fff;
+}
+
+.container {
+  width: 100%;
+  background: red;
+}
+
+.app-name {
+  color: #007fdb;
+  font-size: 80px;
+  font-weight: 700;
+}
