@@ -7,8 +7,28 @@
   padding: 1rem 0;
 }
 
-.input {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+.todo-title {
+  color: #0d0d0d;
+  font-family: Inter;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.todo-time {
+  color: #888;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.todo-info {
+  padding-left: 1rem;
+}
+
+.todo-status {
+  padding-right: 1rem;
 }

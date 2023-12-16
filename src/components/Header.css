@@ -1,12 +1,17 @@
 .todo-img {
   width: 100%;
+  /* position: relative; */
+  padding-bottom: 1rem;
+  display: block;
+}
+
+.header-container {
   position: relative;
 }
 
 .image-text {
   position: absolute;
-  top: 42%;
-  left: 77%;
+  transform: translate(297%, -150%);
   text-align: right;
 }
 

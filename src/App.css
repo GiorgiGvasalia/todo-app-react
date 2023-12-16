@@ -9,6 +9,8 @@
 
 .todo-container {
   background-color: #fff;
+  max-width: 430px;
+  width: 100%;
 }
 
 .container {
@@ -20,4 +22,12 @@
   color: #007fdb;
   font-size: 80px;
   font-weight: 700;
+}
+
+
+@media (max-width: 800px) {
+  .application {
+    display: flex;
+    flex-direction: column;
+  }
 }

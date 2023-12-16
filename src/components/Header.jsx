@@ -3,7 +3,7 @@ import headerImg from '../images/Rectangle2.png'
 
 const Header = () => {
   return (
-    <div>
+    <div className='header-container'>
         <img className='todo-img' src={headerImg} alt="" />
         <div className='image-text'>
              <span className='date'>Thur 9</span>
