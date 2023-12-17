@@ -1,18 +1,6 @@
 {
   "todos": [
     {
-      "id": 1,
-      "title": "Work to do",
-      "time": "Today 8:00 AM",
-      "done": false
-    },
-    {
-      "id": 2,
-      "title": "Dinner",
-      "time": "Today 8:00 PM",
-      "done": false
-    },
-    {
       "id": 3,
       "title": "Studying",
       "time": "Today 11:00 AM",

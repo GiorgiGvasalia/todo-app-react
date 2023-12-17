@@ -12,7 +12,7 @@
     border-radius: 5px;
     background: #ebeff2;
     padding: 0.8rem 1rem;
-    max-width: 330px;
+    max-width: 277px;
     width: 100%;
     color: #888;
     font-size: 16px;
@@ -21,11 +21,30 @@
   }
   
   .add-note-icon {
-    width: 17%;
+    width: 20%;
   }
   
   .input-checkbox {
     position: absolute;
-    transform: translateX(-187px);
+    transform: translateX(-165px);
+  }
+
+  input[type="checkbox"] {
+    border-radius: 50%;
+    border: 1px solid  #20EEB0;
+    appearance: none;
+    outline: none;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
   }
   
+  
+  input[type="checkbox"]:checked {
+    background-image: url("/src/images/checkmark.svg");
+    background-color: #20EEB0;
+  }
+  
+  input[type="checkbox"]::before {
+    content: "";
+  }

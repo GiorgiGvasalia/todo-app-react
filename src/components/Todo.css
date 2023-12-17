@@ -9,20 +9,14 @@
 
 .todo-title {
   color: #0d0d0d;
-  font-family: Inter;
   font-size: 18px;
-  font-style: normal;
   font-weight: 500;
-  line-height: normal;
 }
 
 .todo-time {
   color: #888;
-  font-family: Inter;
   font-size: 14px;
-  font-style: normal;
   font-weight: 400;
-  line-height: normal;
 }
 
 .todo-info {

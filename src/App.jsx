@@ -3,6 +3,7 @@ import "./App.css";
 import Header from "./components/Header";
 import Todo from "./components/Todo";
 import TodoInput from "./components/TodoInput";
+import axios from 'axios';
 
 // npm run server -- to run json server
 
@@ -15,32 +16,36 @@ const initialNote = [
   },
 ];
 
+
 function App() {
   const [notes, setNotes] = useState(initialNote);
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch('http://localhost:9000/todos')
-      const todosData = await response.json()
-      setNotes(todosData)
-      if(!response.ok) throw new Error
-    } catch (error) {
-      console.log(error, "Failed fetching data")
-    }
-   }
+  
 
 useEffect(() => {
-  fetchData()
+  axios.get('http://localhost:9000/todos')
+   .then(response => response.data)
+   .then(notesData => setNotes(notesData))
 }, [])
+
+const addNewNote = (newNote) => {
+  const updatedNotes = [ ...notes, newNote]
+  axios.post('http://localhost:9000/todos', newNote)
+  setNotes(updatedNotes)
+}
+
+  const deleteNote = (noteId ) => {
+    axios.delete(`http://localhost:9000/todos/${noteId}`)
+  }
 
   return (
     <div className="application">
       <h1 className="app-name">TODO</h1>
       <div className="todo-container">
         <Header />
-        <TodoInput />
+        <TodoInput onAddNote={addNewNote}/>
         {notes.map((note) => (
-          <Todo key={note.id} title={note.title} />
+          <Todo key={note.id} title={note.title} time={note.time} id={note.id} onTodoDelete={deleteNote}/>
         ))}
       </div>
     </div>
