@@ -3,7 +3,7 @@ import "./App.css";
 import Header from "./components/Header";
 import Todo from "./components/Todo";
 import TodoInput from "./components/TodoInput";
-import axios from 'axios';
+import todosServices from './services/todos.js'
 
 // npm run server -- to run json server
 
@@ -16,36 +16,58 @@ const initialNote = [
   },
 ];
 
-
 function App() {
   const [notes, setNotes] = useState(initialNote);
 
+  useEffect(() => {
+    todosServices.getAll()
+      .then((notesData) => setNotes(notesData));
+  }, []);
+
+  const addNewNote = (newNote) => {
+    const updatedNotes = [...notes, newNote];
+    todosServices.create(newNote)
+    setNotes(updatedNotes);
+  };
+
+  const deleteTodoNote = (noteId) => {
+    todosServices.deleteTodo(noteId)
+      .then(() => {
+      const updatedNotes = notes.filter((note) => note.id !== noteId);
+      setNotes(updatedNotes);
+    });
+  };
+
+  const toggleTodoDone = (noteId, isDone) => {
+    todosServices.changeTodoDoneStatus(noteId, isDone)
+      .then(() => {
+        const updatedNotes = notes.map((note) => {
+          if (note.id === noteId) {
+            return { ...note, done: !note.done }; 
+          } else {
+            return note;
+          }
+        });
   
-
-useEffect(() => {
-  axios.get('http://localhost:9000/todos')
-   .then(response => response.data)
-   .then(notesData => setNotes(notesData))
-}, [])
-
-const addNewNote = (newNote) => {
-  const updatedNotes = [ ...notes, newNote]
-  axios.post('http://localhost:9000/todos', newNote)
-  setNotes(updatedNotes)
-}
-
-  const deleteNote = (noteId ) => {
-    axios.delete(`http://localhost:9000/todos/${noteId}`)
-  }
+        setNotes(updatedNotes);
+      });
+  };
 
   return (
     <div className="application">
       <h1 className="app-name">TODO</h1>
       <div className="todo-container">
         <Header />
-        <TodoInput onAddNote={addNewNote}/>
+        <TodoInput onAddNote={addNewNote} onTodoDone={() => toggleTodoDone()}/>
         {notes.map((note) => (
-          <Todo key={note.id} title={note.title} time={note.time} id={note.id} onTodoDelete={deleteNote}/>
+          <Todo
+            key={note.id}
+            title={note.title}
+            time={note.time}
+            id={note.id}
+            onTodoDelete={deleteTodoNote}
+            isDone={note.done}
+          />
         ))}
       </div>
     </div>

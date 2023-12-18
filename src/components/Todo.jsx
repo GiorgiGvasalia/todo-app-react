@@ -2,15 +2,15 @@ import DeleteIcon from "./DeleteIcon";
 import "./Todo.css";
 
 
-const Todo = ({ id, title, time, onTodoDelete }) => {
+const Todo = ({ id, title, time, onTodoDelete, isDone }) => {
   return (
     <div className="single-container">
       <div className="todo-info">
-        <p>{title}</p>
-        <span>{time}</span>
+        <p className="todo-title">{title}</p>
+        <span className="todo-time">{time}</span>
       </div>
       <div className="todo-status">
-        <input type="checkbox" name="" id="" />
+        <input type="checkbox" className={isDone ? 'todo-done' : ''} name="" id="" />
         <DeleteIcon onTodoDelete={() => onTodoDelete(id)} noteId={id} />
       </div>
     </div>

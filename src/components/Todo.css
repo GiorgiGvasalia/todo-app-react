@@ -9,13 +9,14 @@
 
 .todo-title {
   color: #0d0d0d;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 500;
+  padding-bottom: 0.2rem;
 }
 
 .todo-time {
   color: #888;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
 }
 
@@ -25,4 +26,9 @@
 
 .todo-status {
   padding-right: 1rem;
+}
+
+input[type="checkbox"]:checked.todo-done {
+  background-image: url("/src/images/checkmark.svg");
+  background-color: #20EEB0;
 }

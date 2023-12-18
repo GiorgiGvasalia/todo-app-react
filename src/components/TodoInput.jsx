@@ -2,24 +2,32 @@ import "./TodoInput.css";
 import addNoteIcon from "../images/Frame9.png";
 import { useState } from "react";
 
-const TodoInput = ({ onAddNote}) => {
+const TodoInput = ({ onAddNote, onTodoDone }) => {
   const [todoInput, setTodoInput] = useState("");
+  const [isDone, setIsDone] = useState(false);
 
   const handleAddNote = (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    if(!todoInput) return
     const newNote = {
       title: todoInput,
-      id:  Math.random() > 0.5,
-      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })    
-    }
-    onAddNote(newNote)
-    setTodoInput('')
+      id: Math.floor(Math.random() * 100),
+      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      done: isDone,
+    };
+    onAddNote(newNote);
+    onTodoDone(newNote.id, isDone); 
+    setTodoInput('');
+    setIsDone(false); 
+  };
 
-  }
+  const handleCheckboxChange = () => {
+    setIsDone((prevIsDone) => !prevIsDone);
+  };
 
   return (
     <div className="input">
-      <input type="checkbox" className="input-checkbox" name="" id="" />
+      <input type="checkbox" checked={isDone} onChange={handleCheckboxChange} className="input-checkbox" name="" id="" />
       <input
         value={todoInput}
         onChange={(e) => setTodoInput(e.target.value)}
@@ -27,7 +35,7 @@ const TodoInput = ({ onAddNote}) => {
         type="text"
         placeholder="Note"
       />
-      <img className="add-note-icon" src={addNoteIcon} alt="" onClick={handleAddNote}/>
+      <img className="add-note-icon" src={addNoteIcon} alt="" onClick={handleAddNote} />
     </div>
   );
 };

@@ -2,11 +2,11 @@ const DeleteIcon = ({ onTodoDelete, noteId }) => {
   const handleDeleting = (e) => {
     e.preventDefault();
     onTodoDelete(noteId); // Pass the noteId to the onTodoDelete function
-    console.log("DELETE CLICKED");
   };
 
   return (
     <svg
+     style={{cursor: 'pointer'}}
       onClick={handleDeleting}
       xmlns="http://www.w3.org/2000/svg"
       width="24"
