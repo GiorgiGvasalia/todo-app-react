@@ -28,7 +28,7 @@
   padding-right: 1rem;
 }
 
-input[type="checkbox"]:checked.todo-done {
+input[type="checkbox"]:checked {
   background-image: url("/src/images/checkmark.svg");
   background-color: #20EEB0;
 }

@@ -1,6 +1,5 @@
 .todo-img {
   width: 100%;
-  /* position: relative; */
   padding-bottom: 1rem;
   display: block;
 }
@@ -11,14 +10,14 @@
 
 .image-text {
   position: absolute;
-  transform: translate(250%, -150%);
+  transform: translate(95%, -150%);
   text-align: right;
 }
 
 .time-display {
   color: #fff;
   font-family: "Russo One", sans-serif;
-  font-size: 48px;
+  font-size: 40px;
   font-weight: 400;
 }
 

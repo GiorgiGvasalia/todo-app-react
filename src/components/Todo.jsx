@@ -1,8 +1,11 @@
 import DeleteIcon from "./DeleteIcon";
 import "./Todo.css";
 
+const Todo = ({ id, title, time, onTodoDelete, isDone, onCheckboxClick }) => {
+  const handleCheckboxClick = () => {
+    onCheckboxClick(id, !isDone);
+  };
 
-const Todo = ({ id, title, time, onTodoDelete, isDone }) => {
   return (
     <div className="single-container">
       <div className="todo-info">
@@ -10,7 +13,11 @@ const Todo = ({ id, title, time, onTodoDelete, isDone }) => {
         <span className="todo-time">{time}</span>
       </div>
       <div className="todo-status">
-        <input type="checkbox" className={isDone ? 'todo-done' : ''} name="" id="" />
+        <input
+          onChange={handleCheckboxClick}
+          checked={isDone}
+          type="checkbox"
+        />
         <DeleteIcon onTodoDelete={() => onTodoDelete(id)} noteId={id} />
       </div>
     </div>

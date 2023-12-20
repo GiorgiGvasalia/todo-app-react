@@ -3,7 +3,7 @@ import "./App.css";
 import Header from "./components/Header";
 import Todo from "./components/Todo";
 import TodoInput from "./components/TodoInput";
-import todosServices from './services/todos.js'
+import todosServices from "./services/todos.js";
 
 // npm run server -- to run json server
 
@@ -18,47 +18,57 @@ const initialNote = [
 
 function App() {
   const [notes, setNotes] = useState(initialNote);
+  const [currentTime, setCurrentTime] = useState(new Date());
 
   useEffect(() => {
-    todosServices.getAll()
-      .then((notesData) => setNotes(notesData));
+    todosServices.getAll().then((notesData) => setNotes(notesData));
   }, []);
 
   const addNewNote = (newNote) => {
     const updatedNotes = [...notes, newNote];
-    todosServices.create(newNote)
+    todosServices.create(newNote);
     setNotes(updatedNotes);
   };
 
   const deleteTodoNote = (noteId) => {
-    todosServices.deleteTodo(noteId)
-      .then(() => {
+    todosServices.deleteTodo(noteId).then(() => {
       const updatedNotes = notes.filter((note) => note.id !== noteId);
       setNotes(updatedNotes);
     });
   };
 
-  const toggleTodoDone = (noteId, isDone) => {
-    todosServices.changeTodoDoneStatus(noteId, isDone)
+  const handleTodoStatusChange = (todoId, newDoneStatus) => {
+    todosServices
+      .changeTodoDoneStatus(todoId, newDoneStatus)
       .then(() => {
-        const updatedNotes = notes.map((note) => {
-          if (note.id === noteId) {
-            return { ...note, done: !note.done }; 
-          } else {
-            return note;
-          }
+        setNotes((prevTodos) => {
+          return prevTodos.map((todo) => {
+            if (todo.id === todoId) {
+              return { ...todo, done: newDoneStatus };
+            }
+            return todo;
+          });
         });
-  
-        setNotes(updatedNotes);
+      })
+      .catch((error) => {
+        console.error("Failed to update todo done status:", error);
       });
   };
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000);
+    todosServices.getAll().then((notesData) => setNotes(notesData));
+    return () => clearInterval(intervalId);
+  }, []);
 
   return (
     <div className="application">
       <h1 className="app-name">TODO</h1>
       <div className="todo-container">
-        <Header />
-        <TodoInput onAddNote={addNewNote} onTodoDone={() => toggleTodoDone()}/>
+        <Header currentTime={currentTime} />
+        <TodoInput onAddNote={addNewNote} />
         {notes.map((note) => (
           <Todo
             key={note.id}
@@ -67,6 +77,7 @@ function App() {
             id={note.id}
             onTodoDelete={deleteTodoNote}
             isDone={note.done}
+            onCheckboxClick={handleTodoStatusChange}
           />
         ))}
       </div>

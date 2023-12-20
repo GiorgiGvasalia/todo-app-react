@@ -20,12 +20,21 @@ const getAll = async () => {
     return response.data;
  }
 
- const changeTodoDoneStatus = async (id, isDone) => {
-   const request = axios.put(`${baseUrl}/${id}`, {done: isDone})
-   const response = await request;
-    return response.data;
- }
-
+ const changeTodoDoneStatus = async (id, newStatus) => {
+   try {
+     const existingTodo = await axios.get(`${baseUrl}/${id}`);
+     const updatedTodo = { ...existingTodo.data, done: newStatus };
+ 
+     const response = await axios.put(`${baseUrl}/${id}`, updatedTodo);
+     console.log(response.data); 
+ 
+     return response.data;
+   } catch (error) {
+     console.error("Error updating todo done status:", error);
+     throw error;
+   }
+ };
+ 
  export default {
     getAll,
     create,
